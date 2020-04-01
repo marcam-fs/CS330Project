@@ -8,17 +8,38 @@
     Monday, March 23, 2020: File created.
 */
 
-#include <marcamOS.h>
+#include "marcamOS.h"
 
-int main()
+//Declare i, the command count, as a global variable
+int i = 0;
+
+int getCommand(string input[])
 {
-    //Welcome user to this OS
-    printf("Welcome to marcamOS, a command line operating system!\n");
+    string command;
+    bool commandEntered = 0;
 
-    //Continously check for user-input commands
     do
-    {}
-    while ()
+    {
+        //Repeatedly print shell name
+        printf("[marcamOS]%%i   ", i);
 
-    return 0;
+        //Receive user input
+        getline(cin, command);
+
+        //Check if this is a command
+        commandEntered = checkForCommand(command);
+
+        //If a command was entered, break (stop receiving input)
+        if (commandEntered)
+            break;
+    } while (command.length == 0);
+    
+}
+
+bool checkForCommand(string command)
+{
+    if (command.length > 0)
+        return true;
+
+    return false;
 }

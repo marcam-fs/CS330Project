@@ -11,18 +11,19 @@
 
 #include "marcamOS.cpp"
 
-bool checkForCommand(string command)
-{
-    if (command.length() > 0)
-        return true;
-
-    return false;
-}
-
-int i = 0;
-
+const int MAX_ARGUMENTS = 30;
 int main()
 {
+    cout << "Welcome to marcamOS, a commmand line operating system!" << endl;
+
+    char ** cInput;
+    string input[MAX_ARGUMENTS];
+    int numOfArg;
+
+    numOfArg = getCommand(input);
+
+    /*int i = 0;
+
     //Welcome user to this OS
     printf("Welcome to marcamOS, a command line operating system!\n");
 
@@ -46,7 +47,7 @@ int main()
             i++;
             break;
         }
-    } while (command.length() == 0);
+    } while (command.length() == 0);*/
 
     return 0;
 }

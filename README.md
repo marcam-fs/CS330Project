@@ -3,7 +3,7 @@ CS 330 - Operating Systems: Project
 
 Name: Maria Azam
 Student Number: 200402217
-Topic: Creating A Simple Operating System
+Topic: Creating A Simple Command Line Operating System
 
 Description:
 Challenges:

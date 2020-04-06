@@ -11,16 +11,15 @@
 
 #include "marcamOS.h"
 
-const int MAX_ARGUMENTS = 30;
 int main()
 {
     cout << "Welcome to marcamOS, a commmand line operating system!" << endl;
 
     char ** cInput;
     string input[MAX_ARGUMENTS];
-    int numOfArg;
+    int argCount;
 
-    numOfArg = getCommand(input);
+    argCount = getCommand(input);
 
     /*int i = 0;
 

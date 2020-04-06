@@ -17,6 +17,8 @@
 #include <cstring>
 using namespace std;
 
+const int MAX_ARGUMENTS = 30;
+
 /*
  Function Name: getCommand
 
@@ -40,3 +42,16 @@ int getCommand(string input[]);
  Side Effect: N/A
 */
 bool checkForCommand(string command);
+
+/*
+ Function Name: tokenizeInput
+
+ Purpose: To separate the user-input command from a string into tokens.
+ Parameter(s):
+    <1> command: The user-input command
+    <2> input: An array of strings to later hold the tokenized command.
+ Precondition: N/A
+ Returns: Number of arguments (tokens) in user-input command.
+ Side Effect: N/A
+*/
+int tokenizeInput(string input[], string command);

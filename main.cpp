@@ -9,7 +9,7 @@
  Revision History: This file was created on Tuesday, March 31, 2020.
  */
 
-#include "marcamOS.cpp"
+#include "marcamOS.h"
 
 const int MAX_ARGUMENTS = 30;
 int main()

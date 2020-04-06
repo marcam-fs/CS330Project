@@ -13,15 +13,15 @@
 //Declare i, the command count, as a global variable
 int getCommand(string input[])
 {
-    int i = 0;
-    
+    int i = 1;
+
     string command;
     bool commandEntered = 0;
 
     do
     {
         //Repeatedly print shell name
-        cout << "[marcamOS]%" << i;
+        cout << "marcamOS[" << i << "]% ";
 
         //Receive user input
         getline(cin, command);

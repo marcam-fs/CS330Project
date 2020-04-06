@@ -8,10 +8,14 @@
 
 #pragma once
 
+#include <cstdlib>
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <string>
+#include <iostream>
+#include <cstring>
+using namespace std;
 
 /*
  Function Name: getCommand

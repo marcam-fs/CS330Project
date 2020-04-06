@@ -9,15 +9,7 @@
  Revision History: This file was created on Tuesday, March 31, 2020.
  */
 
-//#include "marcamOS.cpp"
-#include <cstdlib>
-#include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <string>
-#include <iostream>
-#include <cstring>
-using namespace std;
+#include "marcamOS.cpp"
 
 bool checkForCommand(string command)
 {

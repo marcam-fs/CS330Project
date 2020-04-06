@@ -38,7 +38,7 @@ int getCommand(string input[])
 
 bool checkForCommand(string command)
 {
-    if (command.length > 0)
+    if (command.length() > 0)
         return true;
 
     return false;

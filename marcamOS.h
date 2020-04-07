@@ -55,3 +55,16 @@ bool checkForCommand(string command);
  Side Effect: N/A
 */
 int tokenizeInput(string input[], string command);
+
+/*
+ Function Name: processCommand
+
+ Purpose: To decide whether to continue processing user commands or terminate the shell.
+ Parameter(s):
+    <1> input: The user-input command as a tokenized array of strings.
+    <2> tokenCount: Number of arguments entered by user.
+ Precondition: N/A
+ Returns: True or false, corresponding to whether or not to continue processing user commands, respectively.
+ Side Effect: N/A
+*/
+bool processCommand(string input[], int tokenCount);

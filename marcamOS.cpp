@@ -91,3 +91,27 @@ int tokenizeInput(string input[], string command)
     //Return number of tokens in user-input command
     return tokenCount;
 }
+
+bool processCommand(string input[], int tokenCount)
+{
+    //If the user wishes to terminate the shell,
+    if (tokens[0] == "shutdown" || tokens[0] == "restart" || tokens[0] == "logout")
+    {
+        //If user enters an argument along w/ the termination command, print a message & return true to continue processing commands
+        if (tokenCount > 1)
+        {
+            cout << "This command requires no arguments" << endl;
+            return true;
+        }
+        //Otherwise, print a termination message & return false
+        else
+        {
+            cout << endl << "marcamOS shell terminating..." << endl;
+            return false;
+        }
+    }
+    //If no termination command was entered, return true to continue processing commands
+    else
+        return true;
+    
+}

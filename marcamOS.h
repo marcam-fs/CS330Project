@@ -15,6 +15,8 @@
 #include <string>
 #include <iostream>
 #include <cstring>
+#include <errno.h>
+#include <sys/wait.h>
 using namespace std;
 
 const int MAX_ARGUMENTS = 30;
@@ -25,11 +27,12 @@ const int MAX_ARGUMENTS = 30;
  Purpose: To receive a user-input command from the keyboard.
  Parameter(s):
     <1> input: The user-input command.
+    <2> i: An integer keeping track of how many commands the user has entered.
  Precondition: N/A
  Returns: Number of arguments in user-input command.
  Side Effect: N/A
 */
-int getCommand(string input[]);
+int getCommand(string input[], int &i);
 
 /*
  Function Name: checkForCommand
@@ -63,8 +66,21 @@ int tokenizeInput(string input[], string command);
  Parameter(s):
     <1> input: The user-input command as a tokenized array of strings.
     <2> tokenCount: Number of arguments entered by user.
- Precondition: N/A
+ Precondition: 'input' must be intialized
  Returns: True or false, corresponding to whether or not to continue processing user commands, respectively.
  Side Effect: N/A
 */
 bool processCommand(string input[], int tokenCount);
+
+/*
+ Function Name: processCommand
+
+ Purpose: To conver the user-input command into a cString so that it can be used in an execvp() sys call.
+ Parameter(s):
+    <1> input: The user-input command as a tokenized array of strings.
+    <2> tokenCount: Number of arguments entered by user.
+ Precondition: 'input' must be initialized
+ Returns: cString of all arguments in the user-input command.
+ Side Effect: N/A
+*/
+char ** convertToCString(string input[], int tokenCount);

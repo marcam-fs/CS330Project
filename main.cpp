@@ -18,35 +18,12 @@ int main()
     char ** cInput;
     string input[MAX_ARGUMENTS];
     int argCount;
+    int i = 1;
 
-    argCount = getCommand(input);
-
-    /*int i = 0;
-
-    //Welcome user to this OS
-    printf("Welcome to marcamOS, a command line operating system!\n");
-
-    string command;
-    bool commandEntered = 0;
-
-    do
+    do 
     {
-        //Repeatedly print shell name
-       cout << "[marcamOS]%" << i << "  ";
-
-        //Receive user input
-        getline(cin, command);
-
-        //Check if this is a command
-        commandEntered = checkForCommand(command);
-
-        //If a command was entered, break (stop receiving input)
-        if (commandEntered)
-        {
-            i++;
-            break;
-        }
-    } while (command.length() == 0);*/
+        argCount = getCommand(input, i);
+    } while (processCommand(input, argCount));
 
     return 0;
 }

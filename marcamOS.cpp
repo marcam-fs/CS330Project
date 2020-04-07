@@ -11,9 +11,8 @@
 #include "marcamOS.h"
 
 //Declare i, the command count, as a global variable
-int getCommand(string input[])
+int getCommand(string input[], int &i)
 {
-    int i = 1;
     string command;
     bool commandEntered = 0;
     int tokenCount;
@@ -95,7 +94,7 @@ int tokenizeInput(string input[], string command)
 bool processCommand(string input[], int tokenCount)
 {
     //If the user wishes to terminate the shell,
-    if (tokens[0] == "shutdown" || tokens[0] == "restart" || tokens[0] == "logout")
+    if (input[0] == "shutdown" || input[0] == "restart" || input[0] == "logout")
     {
         //If user enters an argument along w/ the termination command, print a message & return true to continue processing commands
         if (tokenCount > 1)
@@ -103,15 +102,71 @@ bool processCommand(string input[], int tokenCount)
             cout << "This command requires no arguments" << endl;
             return true;
         }
+        
         //Otherwise, print a termination message & return false
-        else
-        {
-            cout << endl << "marcamOS shell terminating..." << endl;
-            return false;
-        }
+        cout << endl << "marcamOS shell terminating..." << endl;
+        return false;
     }
     //If no termination command was entered, return true to continue processing commands
     else
+    {
+        //Fork to create a child and parent
+        pid_t forkReturn = fork();
+        int status;
+
+        //Child process
+        if (forkReturn == 0)
+        {
+            //Capture cString in a char** variable
+            char ** argv;
+            argv = convertToCString(input, tokenCount);
+
+            //Execute user-input command using execvp()
+            execvp(argv[0], argv);
+
+            //If error occurs, print message
+            perror("Error on execvp().\n");
+
+            //Exit child process
+            exit(1);
+        }
+        //Parent process
+        else if (forkReturn > 0)
+        {
+            //Wait for child
+            wait(&status);
+        }
+        //Error case
+        else
+        {
+            cout << "Fork Error: ";
+
+            switch(errno)
+            {
+                case EAGAIN:
+                    cout << "System process limit reached." << endl;
+                case ENOMEM:
+                    cout << "Out of memory." << endl;
+            }
+        }
+        
         return true;
-    
+    }
+}
+
+
+char ** convertToCString(string input[], int tokenCount)
+{
+    //Declare an argument vector to be used w/ execvp
+    char ** words;
+    words = (char **)malloc(sizeof(char *) * (tokenCount + 1));
+
+    //Duplicate each element in 'input' & store in new argument vector
+    for (int i = 0; i < tokenCount; i++)
+        words[i] = strdup(input[i].c_str());
+
+    //Initialize last word to NULL
+    words[tokenCount] = NULL;
+
+    return words;
 }

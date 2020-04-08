@@ -84,3 +84,16 @@ bool processCommand(string input[], int tokenCount);
  Side Effect: N/A
 */
 char ** convertToCString(string input[], int tokenCount);
+
+/*
+ Function Name: writeToFile
+
+ Purpose: To write to a file using sockets.
+ Parameter(s):
+    <1> argv: The user-input command as a cString
+    <2> tokenCount: Number of arguments entered by user.
+ Precondition: 'input' must be initialized & 'argv' must be initialized. 'argv[0]' must be "write"
+ Returns: N/A
+ Side Effect: N/A
+ */
+void writeToFile(char ** argv, int tokenCount);

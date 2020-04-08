@@ -4,7 +4,6 @@
  Course Number: CS 330
 
  File Name: main.cpp
- Purpose: 
 
  Revision History: This file was created on Tuesday, March 31, 2020.
  */

@@ -121,12 +121,25 @@ bool processCommand(string input[], int tokenCount)
             char ** argv;
             argv = convertToCString(input, tokenCount);
 
-            //Execute user-input command using execvp()
-            execvp(argv[0], argv);
+            //If the user issues a write command
+            if (!strcmp(argv[0], "writefile"))
+            {
+                //If 1 file has not been specified, print error message
+                if (tokenCount == 1 || tokenCount > 2)
+                    cout << "Please specify a single file to be written to." << endl;
+                //Othwerwise, write to the file
+                else
+                    writeToFile(argv, tokenCount);
+                
+            }
+            //Otherwise, execute user-input command using execvp()
+            else
+            {
+                execvp(argv[0], argv);
 
-            //If error occurs, print message
-            perror("Error on execvp().\n");
-
+                //If error occurs, print message
+                perror("Error on execvp().\n");
+            }
             //Exit child process
             exit(1);
         }
@@ -169,4 +182,12 @@ char ** convertToCString(string input[], int tokenCount)
     words[tokenCount] = NULL;
 
     return words;
+}
+
+
+void writeToFile(char ** argv, int tokenCount)
+{
+    //If file does not exist, print error message
+    //Otherwise, write to file
+    cout << "In write function." << endl;
 }

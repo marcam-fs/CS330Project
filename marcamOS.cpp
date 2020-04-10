@@ -167,7 +167,6 @@ bool processCommand(string input[], int tokenCount)
     }
 }
 
-
 char ** convertToCString(string input[], int tokenCount)
 {
     //Declare an argument vector to be used w/ execvp
@@ -184,10 +183,20 @@ char ** convertToCString(string input[], int tokenCount)
     return words;
 }
 
-
 void writeToFile(char ** argv, int tokenCount)
 {
-    //If file does not exist, print error message
+    int inputFile;
+    string filename = argv[1];
+
+    if (filename.find(".") == string::npos)
+    {
+        cout << "Please specify a proper file extension." << endl;
+        exit(1);
+    }
+
+    //inputFile.open(filename.c_str());
+    inputFile = open(filename.c_str(), O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+    //If file does not exist, create one
+
     //Otherwise, write to file
-    cout << "In write function." << endl;
 }

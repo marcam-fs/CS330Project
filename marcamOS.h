@@ -17,6 +17,9 @@
 #include <cstring>
 #include <errno.h>
 #include <sys/wait.h>
+//#include <fstream>
+#include <sys/stat.h>
+#include <fcntl.h>
 using namespace std;
 
 const int MAX_ARGUMENTS = 30;

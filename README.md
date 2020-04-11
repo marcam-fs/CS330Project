@@ -18,11 +18,11 @@ Challenges:
         them. I realized this was due to a simple mistake in my '#include' statements.
 
     Friday, April 10, 2020: I am implementing the 'writeToFile' function today and am having trouble with pipe redirection. I am
-        trying to write from standard input to the file, but can't seem to get it working properly.
+        trying to write from standard input to a file.
 
         Writing to a file via a pipe now works. However, writing to a file that has already been written to wipes the previously
         written contents. Need to find a way to point to the last line of the file. Solved using an if-else statement and
-        specifying changing permissions in open() system call.
+        specifying permissions in open() system call.
 
 REPRODUCTION
 In order to reproduce the project, please do the following:
@@ -33,7 +33,7 @@ In order to reproduce the project, please do the following:
         g++ -c marcamOS.cpp
     - Link the files and create an object file
         g++ main.cpp marcamOS.cpp -o marcamOS
-    - Run and execute any regular command
+    - Run the program and execute any regular command
         ./marcamOS
     - If at any point you need help, enter "help"
     - To exit the program, type "logout", "restart", or "shutdown".

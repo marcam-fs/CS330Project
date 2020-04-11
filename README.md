@@ -8,11 +8,14 @@ Topic: Creating A Simple Command Line Operating System
 Description:
 Challenges:
     Sunday, April 05, 2020: Previously, I had my code for receiving user commands and checking if they were valid commands in 
-    main.cpp. This was done to make sure the base of the program was running properly. Today, I separated this code between 
-    main.cpp and marcamOS.cpp. I am able to compile both files, but am encountering a "duplicate symbol" error when linking 
-    them. I realized this was due to a simple mistake in my '#include' statements.
+        main.cpp. This was done to make sure the base of the program was running properly. Today, I separated this code between 
+        main.cpp and marcamOS.cpp. I am able to compile both files, but am encountering a "duplicate symbol" error when linking 
+        them. I realized this was due to a simple mistake in my '#include' statements.
 
     Friday, April 10, 2020: I am implementing the 'writeToFile' function today and am having trouble with pipe redirection. I am
-    trying to write from standard input to the file, but can't seem to get it working properly.
+        trying to write from standard input to the file, but can't seem to get it working properly.
+
+        Writing to a file via a pipe now works. However, writing to a file that has already been written to wipes the previously
+        written contents. Need to find a way to point to the last line of the file.
 
 Reproduction:

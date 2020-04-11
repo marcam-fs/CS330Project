@@ -196,28 +196,45 @@ void writeToFile(char ** argv, int tokenCount)
         exit(2);
     }
   
-    //Close write end of pipe
-    close(fdes[1]);
-
-    //Open or create file to write to
-    outFile = open(filename.c_str(), O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-
-    //Display instructions
-    cout << "Write to the file. Once done, type 'STOP'." << endl;
-
-    //Redirect standard output to be written to the file
-    dup2(outFile, fileno(stdout));
-    close(fdes[0]);
-    close(fdes[1]);
-
-    //Continue reading user input & writing to file, until user enters 'STOP'
-    while (getline(cin, input))
+    pid_t forkReturn = fork();
+    int status;
+    
+    //Error case
+    if (forkReturn == -1)
     {
-        if (input == "STOP")
-            exit(4);
-        cout << input << endl;
+        perror("Fork Error");
+        exit(3);
     }
+    //Child process
+    else if (forkReturn == 0)
+    {
+        //Close write end of pipe
+        close(fdes[1]);
 
+        //Open or create file to write to
+        outFile = open(filename.c_str(), O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
 
-    //fflush(stdout);
+        //Display instructions
+        cout << "Write to the file. Once done, type 'STOP'." << endl;
+
+        //Redirect standard output to be written to the file
+        dup2(outFile, fileno(stdout));
+        close(fdes[0]);
+        close(fdes[1]);
+
+        //Continue reading user input & writing to file, until user enters 'STOP'
+        while (getline(cin, input))
+        {
+            if (input == "STOP")
+                exit(4);
+            cout << input << endl;
+        }
+    }
+    //Parent process
+    else
+    {
+        //Wait for child
+        wait(&status);
+    }
+    
 }

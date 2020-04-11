@@ -138,7 +138,7 @@ bool processCommand(string input[], int tokenCount)
                 execvp(argv[0], argv);
 
                 //If error occurs, print message
-                perror("Error on execvp().\n");
+                perror("Execvp() Error");
             }
             //Exit child process
             exit(1);
@@ -152,15 +152,8 @@ bool processCommand(string input[], int tokenCount)
         //Error case
         else
         {
-            cout << "Fork Error: ";
-
-            switch(errno)
-            {
-                case EAGAIN:
-                    cout << "System process limit reached." << endl;
-                case ENOMEM:
-                    cout << "Out of memory." << endl;
-            }
+            perror("Fork Error");
+            exit(1);
         }
         
         return true;
@@ -185,8 +178,9 @@ char ** convertToCString(string input[], int tokenCount)
 
 void writeToFile(char ** argv, int tokenCount)
 {
-    int inputFile;
+    int outFile;
     string filename = argv[1];
+    string input;
 
     if (filename.find(".") == string::npos)
     {
@@ -194,9 +188,36 @@ void writeToFile(char ** argv, int tokenCount)
         exit(1);
     }
 
-    //inputFile.open(filename.c_str());
-    inputFile = open(filename.c_str(), O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-    //If file does not exist, create one
+    //Create a pipe
+    int fdes[2];
+    if (pipe(fdes) == -1)
+    {
+        perror("Pipe Error");
+        exit(2);
+    }
+  
+    //Close write end of pipe
+    close(fdes[1]);
 
-    //Otherwise, write to file
+    //Open or create file to write to
+    outFile = open(filename.c_str(), O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+
+    //Display instructions
+    cout << "Write to the file. Once done, type 'STOP'." << endl;
+
+    //Redirect standard output to be written to the file
+    dup2(outFile, fileno(stdout));
+    close(fdes[0]);
+    close(fdes[1]);
+
+    //Continue reading user input & writing to file, until user enters 'STOP'
+    while (getline(cin, input))
+    {
+        if (input == "STOP")
+            exit(4);
+        cout << input << endl;
+    }
+
+
+    //fflush(stdout);
 }

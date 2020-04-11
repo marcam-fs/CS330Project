@@ -1,11 +1,8 @@
 /*
  Programmer Name: Maria Azam
- Student Number: 200402217
- Course Number: CS 330
 
  File Name: main.cpp
-
- Revision History: This file was created on Tuesday, March 31, 2020.
+ Created: Tuesday, March 31, 2020.
  */
 
 #include "marcamOS.h"

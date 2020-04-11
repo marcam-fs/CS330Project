@@ -1,11 +1,16 @@
 # CS330Project
 CS 330 - Operating Systems: Project
 
-Name: Maria Azam
-Student Number: 200402217
-Topic: Creating A Simple Command Line Operating System
+NAME 
+Maria Azam
 
-Description:
+STUDENT NUMBER
+200402217
+
+TOPIC
+Description: A simple emulation of a shell, featuring the use of a pipe to write to a file; this improves user experience,
+    because files can be written to simply by typing in the terminal, instead of using the echo command and ">" characters.
+
 Challenges:
     Sunday, April 05, 2020: Previously, I had my code for receiving user commands and checking if they were valid commands in 
         main.cpp. This was done to make sure the base of the program was running properly. Today, I separated this code between 
@@ -16,6 +21,7 @@ Challenges:
         trying to write from standard input to the file, but can't seem to get it working properly.
 
         Writing to a file via a pipe now works. However, writing to a file that has already been written to wipes the previously
-        written contents. Need to find a way to point to the last line of the file.
+        written contents. Need to find a way to point to the last line of the file. Solved using an if-else statement and
+        specifying changing permissions in open() system call.
 
 Reproduction:

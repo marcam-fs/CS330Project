@@ -1,9 +1,8 @@
 /*
  Programmer Name: Maria Azam
- File Name: Monster.cpp
- 
- Revision History:
-    Tuesday, March 31, 2020: File created.
+
+ File Name: marcamOS.cpp
+ Created: Tuesday, March 31, 2020
 */
 
 #pragma once
@@ -18,7 +17,6 @@
 #include <errno.h>
 #include <sys/wait.h>
 #include <fstream>
-#include <sys/stat.h>
 #include <fcntl.h>
 using namespace std;
 

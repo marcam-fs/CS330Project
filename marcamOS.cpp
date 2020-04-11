@@ -1,11 +1,8 @@
 /*
  Programmer Name: Maria Azam
- File Name: marcamOS.cpp
- 
- Purpose:
 
- Revision History:
-    Monday, March 23, 2020: File created.
+ File Name: marcamOS.cpp
+ Created: Monday, March 23, 2020
 */
 
 #include "marcamOS.h"
@@ -114,8 +111,14 @@ bool processCommand(string input[], int tokenCount)
         pid_t forkReturn = fork();
         int status;
 
+        //Error case
+        if (forkReturn == -1)
+        {
+            perror("Fork Error");
+            exit(1);
+        }
         //Child process
-        if (forkReturn == 0)
+        else if (forkReturn == 0)
         {
             //Capture cString in a char** variable
             char ** argv;
@@ -144,16 +147,10 @@ bool processCommand(string input[], int tokenCount)
             exit(1);
         }
         //Parent process
-        else if (forkReturn > 0)
+        else 
         {
             //Wait for child
             wait(&status);
-        }
-        //Error case
-        else
-        {
-            perror("Fork Error");
-            exit(1);
         }
         
         return true;
@@ -182,6 +179,7 @@ void writeToFile(char ** argv, int tokenCount)
     string filename = argv[1];
     string input;
 
+    //Check if user has entered a file extension & if not, print message
     if (filename.find(".") == string::npos)
     {
         cout << "Please specify a proper file extension." << endl;
@@ -196,9 +194,10 @@ void writeToFile(char ** argv, int tokenCount)
         exit(2);
     }
   
+    //Fork to create child and parent
     pid_t forkReturn = fork();
     int status;
-    
+
     //Error case
     if (forkReturn == -1)
     {
@@ -211,13 +210,24 @@ void writeToFile(char ** argv, int tokenCount)
         //Close write end of pipe
         close(fdes[1]);
 
-        //Open or create file to write to
-        outFile = open(filename.c_str(), O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-
+        //Check if file exists
+        fstream fileExists(filename.c_str());
+        if (fileExists)
+        {
+            //Append to file
+            outFile = open(filename.c_str(), O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR);
+        }
+        else
+        {
+            //Create file
+            outFile = open(filename.c_str(), O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+        }
+        fileExists.close();
+        
         //Display instructions
-        cout << "Write to the file. Once done, type 'STOP'." << endl;
+        cout << "Write to the file. Once done, type 'STOP' on a newline." << endl;
 
-        //Redirect standard output to be written to the file
+        //Redirect standard output to be written to the file & close unused file descriptors
         dup2(outFile, fileno(stdout));
         close(fdes[0]);
         close(fdes[1]);

@@ -24,4 +24,16 @@ Challenges:
         written contents. Need to find a way to point to the last line of the file. Solved using an if-else statement and
         specifying changing permissions in open() system call.
 
-Reproduction:
+REPRODUCTION
+In order to reproduce the project, please do the following:
+    - Download the following files into a single directory: main.cpp, marcamOS.h, and marcamOS.cpp. 
+    - Once done, open a terminal and change into this directory. 
+    - Compile the C++ files
+        g++ -c main.cpp
+        g++ -c marcamOS.cpp
+    - Link the files and create an object file
+        g++ main.cpp marcamOS.cpp -o marcamOS
+    - Run and execute any regular command
+        ./marcamOS
+    - If at any point you need help, enter "help"
+    - To exit the program, type "logout", "restart", or "shutdown".

@@ -26,7 +26,10 @@ Challenges:
 
 REPRODUCTION
 In order to reproduce the project, please do the following:
-    - Download the following files into a single directory: main.cpp, marcamOS.h, and marcamOS.cpp. 
+    - Download the following files into a single directory
+        main.cpp
+        marcamOS.h
+        marcamOS.cpp.
     - Once done, open a terminal and change into this directory. 
     - Compile the C++ files
         g++ -c main.cpp

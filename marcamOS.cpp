@@ -135,6 +135,11 @@ bool processCommand(string input[], int tokenCount)
                     writeToFile(argv, tokenCount);
                 
             }
+            //If the user issues a help command
+            else if (!strcmp(argv[0], "help"))
+            {
+                helpUser();
+            }
             //Otherwise, execute user-input command using execvp()
             else
             {
@@ -247,4 +252,13 @@ void writeToFile(char ** argv, int tokenCount)
         wait(&status);
     }
     
+}
+
+void helpUser()
+{
+    cout << "I am here to help!" << endl
+    << "To execute any regular command, simply type it into the terminal." << endl
+    << "If there is an error, you will be notified." << endl
+    << "If you wish to write to a file, please use the 'writefile' command." << endl
+    << "If you wish to end the shell, type 'logout,' 'restart,' or 'shutdown.'" << endl;
 }

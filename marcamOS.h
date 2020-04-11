@@ -98,3 +98,14 @@ char ** convertToCString(string input[], int tokenCount);
  Side Effect: N/A
  */
 void writeToFile(char ** argv, int tokenCount);
+
+/*
+ Function Name: helpUser
+
+ Purpose: A helper function used to display help instructions to user.
+ Parameter(s): None
+ Precondition: User enters "help".
+ Returns: N/A
+ Side Effect: Prints help instructions.
+ */
+void helpUser();

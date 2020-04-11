@@ -1,13 +1,8 @@
 # CS330Project
 CS 330 - Operating Systems: Project
 
-NAME
-
-Maria Azam
-
-STUDENT NUMBER
-
-200402217
+Name: Maria Azam
+Student Number: 200402217
 
 TOPIC
 
